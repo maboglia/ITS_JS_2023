@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>.container img {width: 140px;}</style>
+</head>
+<body>
+    
+<input type="text" name="regione" id="regione">
+
+<div class="container"></div>
+
+<script>
+
+    const REGIONE = document.getElementById('regione');
+    const URL = 'https://restcountries.com/v3.1/region/'
+    
+    REGIONE.addEventListener('change', () => {
+        fetch(URL + REGIONE.value)
+            .then(res => res.json())
+            .then(paesi => {
+                document.querySelector('.container').innerHTML=''
+                for (const paese of paesi) {
+                    const IMG = document.createElement('img');
+                    IMG.src = paese.flags.png;
+                    document.querySelector('.container').append(IMG)
+                    console.log(paese);
+                }
+            })     
+    })
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

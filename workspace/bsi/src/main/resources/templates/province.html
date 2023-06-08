@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>Trova popolazione per provincia</h1>
+
+<select id="regioni"></select>
+
+
+<select id="province"></select>
+
+<div id="output"></div>
+
+<script>
+
+
+    const URL_BASE = 'http://localhost:9090/api/';
+    const URL_REGIONI = URL_BASE + 'regioni';
+    const TENDINAREGIONI = document.getElementById("regioni")
+    const TENDINACOMUNI = document.getElementById("province")
+
+    fetch(URL_REGIONI)
+        .then(res => res.json())
+        .then(res => {
+            for (const regione of res) {
+                const OPTION = document.createElement("option");
+                OPTION.textContent = regione;
+                TENDINAREGIONI.append(OPTION)
+            }
+        })
+
+    TENDINAREGIONI.onchange = function () {
+        
+        fetch(URL_BASE + 'province/' + this.value)
+        .then(res => res.json())
+        .then(res => {
+        	TENDINACOMUNI.innerHTML = ''
+            for (const provincia of res) {
+                const OPTION = document.createElement("option");
+                OPTION.textContent = provincia.comune;
+                TENDINACOMUNI.append(OPTION)
+            }
+        })
+
+
+
+
+    }
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
