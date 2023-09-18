@@ -7,6 +7,19 @@
 </head>
 <body>
     <h1>Test</h1>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        $('h1')
+            .html('pippo')
+            .css('color','red')
+            
+        $('h1').click(function () {
+            $(this).fadeOut(2500)
+        })
+
+    </script>
+
 </body>
 </html>
